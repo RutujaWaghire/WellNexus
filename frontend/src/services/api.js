@@ -49,6 +49,7 @@ export const productService = {
   getByCategory: (category) => api.get(`/products/category/${category}`),
   getAvailable: () => api.get('/products/available'),
   create: (data) => api.post('/products', data),
+  addStock: (id, quantity) => api.put(`/products/${id}/stock?stock=${quantity}`),
 };
 
 export const orderService = {

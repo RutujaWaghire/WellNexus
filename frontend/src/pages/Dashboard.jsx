@@ -138,7 +138,14 @@ const Dashboard = () => {
                 <div key={session.id} className="bg-gray-50 p-4 rounded-lg">
                   <p><strong>Practitioner:</strong> {session.practitionerName || 'Unknown'}</p>
                   <p><strong>Specialization:</strong> {session.practitionerSpecialization || 'N/A'}</p>
-                  <p><strong>Date:</strong> {new Date(session.date).toLocaleString()}</p>
+                  <p><strong>Date & Time:</strong> {new Date(session.date).toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true
+                  })}</p>
                   <p><strong>Status:</strong> <span className="text-teal-600 font-semibold">{session.status}</span></p>
                   {session.status === 'booked' && (
                     <button
