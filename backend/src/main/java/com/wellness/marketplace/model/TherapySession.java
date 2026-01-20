@@ -26,8 +26,15 @@ public class TherapySession {
     private LocalDateTime date;
     
     @Column(nullable = false)
-    private String status; // booked or completed
+    private String status = "booked"; // booked or completed
     
     @Column(columnDefinition = "TEXT")
     private String notes;
+    
+    @PrePersist
+    protected void onCreate() {
+        if (this.status == null) {
+            this.status = "booked";
+        }
+    }
 }

@@ -29,21 +29,31 @@ const PatientDashboard = () => {
   const [practitionerProfile, setPractitionerProfile] = useState(null);
   const [recommendations, setRecommendations] = useState([]);
   const [symptom, setSymptom] = useState('');
+  const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
     loadDashboardData();
-  }, [user]);
+  }, [user, refreshKey]);
+
+  useEffect(() => {
+    // Listen for dashboard refresh events
+    const handleRefresh = () => setRefreshKey(prev => prev + 1);
+    window.addEventListener('dashboardRefresh', handleRefresh);
+    return () => window.removeEventListener('dashboardRefresh', handleRefresh);
+  }, []);
 
   const loadDashboardData = async () => {
     try {
+      console.log('Loading sessions for userId:', user.userId);
       const sessionsRes = await sessionService.getUserSessions(user.userId);
-      setSessions(sessionsRes.data);
+      console.log('Sessions response:', sessionsRes.data);
+      setSessions(sessionsRes.data || []);
 
       const ordersRes = await orderService.getUserOrders(user.userId);
-      setOrders(ordersRes.data);
+      setOrders(ordersRes.data || []);
 
       const recsRes = await recommendationService.getUserRecommendations(user.userId);
-      setRecommendations(recsRes.data);
+      setRecommendations(recsRes.data || []);
 
       if (user.role === 'practitioner') {
         const profileRes = await practitionerService.getByUserId(user.userId);

@@ -17,11 +17,13 @@ public class TherapySessionController {
     
     @PostMapping
     public ResponseEntity<TherapySession> bookSession(@RequestBody TherapySession session) {
+        System.out.println("Received booking request: userId=" + session.getUserId() + ", practitionerId=" + session.getPractitionerId() + ", date=" + session.getDate());
         return ResponseEntity.ok(sessionService.bookSession(session));
     }
     
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<TherapySession>> getUserSessions(@PathVariable Long userId) {
+        System.out.println("GET /user/{userId} endpoint called with userId=" + userId);
         return ResponseEntity.ok(sessionService.getUserSessions(userId));
     }
     

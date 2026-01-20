@@ -37,13 +37,15 @@ public class DataInitializer {
             admin.setBio("System Administrator");
             admin = userRepository.save(admin);
 
-            // Create sample users
+            // Create sample patient user
             User patient = new User();
             patient.setName("John Doe");
             patient.setEmail("patient@example.com");
             patient.setPassword(passwordEncoder.encode("password123"));
             patient.setRole("patient");
             patient.setBio("Looking for wellness solutions");
+            patient.setAccountStatus("APPROVED");
+            patient.setVerified(true);
             userRepository.save(patient);
 
             User practitioner1 = new User();

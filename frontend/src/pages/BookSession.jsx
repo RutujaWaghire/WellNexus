@@ -108,8 +108,14 @@ const BookSession = () => {
 
     try {
       const dateTime = `${selectedDate}T${selectedSlot.time}:00`;
+      
+      // Use the practitioner's userId, not the profile id
+      const practitionerUserId = practitioner?.userId || parseInt(practitionerId);
+      
+      console.log('Booking session - practitionerId:', practitionerId, 'practitioner.userId:', practitioner?.userId, 'using:', practitionerUserId);
+      
       await sessionService.book({
-        practitionerId: parseInt(practitionerId),
+        practitionerId: practitionerUserId,
         userId: user.userId,
         date: new Date(dateTime).toISOString()
       });
@@ -117,11 +123,15 @@ const BookSession = () => {
       setShowConfirmation(true);
       addToast('Session booked successfully! 🎉', 'success');
       
+      // Emit refresh event for dashboard
+      window.dispatchEvent(new Event('dashboardRefresh'));
+      
       setTimeout(() => {
         navigate('/dashboard');
       }, 2000);
     } catch (error) {
       addToast('Error booking session', 'error');
+      console.error('Booking error:', error);
     }
   };
 

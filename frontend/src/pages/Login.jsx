@@ -14,8 +14,8 @@ const Login = () => {
 
   const demoCredentials = [
     { role: '👨‍⚕️ Admin', email: 'admin@wellness.com', password: 'Admin@123' },
-    { role: '🧑‍⚕️ Practitioner', email: 'dr.smith@wellness.com', password: 'Pract@123' },
-    { role: '🧘 Patient', email: 'patient@wellness.com', password: 'Patient@123' }
+    { role: '🧑‍⚕️ Practitioner', email: 'sarah@example.com', password: 'password123' },
+    { role: '🧘 Patient', email: 'patient@example.com', password: 'password123' }
   ];
 
   const handleSubmit = async (e) => {

@@ -13,12 +13,18 @@ public class TherapySessionService {
     private TherapySessionRepository sessionRepository;
     
     public TherapySession bookSession(TherapySession session) {
+        System.out.println("Booking session for userId: " + session.getUserId() + ", practitionerId: " + session.getPractitionerId());
         session.setStatus("booked");
-        return sessionRepository.save(session);
+        TherapySession saved = sessionRepository.save(session);
+        System.out.println("Session saved with id: " + saved.getId());
+        return saved;
     }
     
     public List<TherapySession> getUserSessions(Long userId) {
-        return sessionRepository.findByUserId(userId);
+        System.out.println("Fetching sessions for userId: " + userId);
+        List<TherapySession> sessions = sessionRepository.findByUserId(userId);
+        System.out.println("Found " + sessions.size() + " sessions for userId: " + userId);
+        return sessions;
     }
     
     public List<TherapySession> getPractitionerSessions(Long practitionerId) {
