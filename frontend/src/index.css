@@ -9,4 +9,221 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(to bottom right, #f0fdf4, #ffffff);
+  min-height: 100vh;
+}
+
+/* Professional Wellness Theme */
+.wellness-card {
+  @apply bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300;
+}
+
+.btn-primary {
+  @apply bg-wellness-green text-white px-6 py-3 rounded-lg font-semibold hover:bg-wellness-green-dark transition-all duration-200 shadow-md;
+}
+
+.btn-secondary {
+  @apply bg-white text-wellness-green px-6 py-3 rounded-lg font-semibold border-2 border-wellness-green hover:bg-green-50 transition-all duration-200;
+}
+
+.input-field {
+  @apply w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-wellness-green focus:ring-2 focus:ring-green-100 outline-none transition-all;
+}
+
+.badge-success { @apply bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium; }
+.badge-warning { @apply bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium; }
+.badge-error { @apply bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium; }
+.badge-pending { @apply bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium; }
+
+/* 🌿 Image & Card Hover Effects */
+.wellness-image {
+  @apply rounded-lg transition-all duration-500 ease-out;
+  opacity: 0.85;
+  transform: scale(1);
+}
+
+.wellness-image:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.wellness-card-hover {
+  @apply bg-white rounded-xl shadow-md p-6 transition-all duration-300 ease-out cursor-pointer;
+  transform: translateY(0);
+}
+
+.wellness-card-hover:hover {
+  @apply shadow-2xl;
+  transform: translateY(-6px);
+}
+
+/* 🌿 Button Animations */
+.btn-animated {
+  @apply transition-all duration-300 ease-out;
+  transform: scale(1);
+}
+
+.btn-animated:hover {
+  transform: scale(1.05);
+}
+
+.btn-animated:active {
+  transform: scale(0.98);
+}
+
+/* 🌿 Fade-in & Slide-up Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.slide-up {
+  animation: slideUp 0.7s ease-out;
+}
+
+.slide-down {
+  animation: slideDown 0.5s ease-out;
+}
+
+.scale-in {
+  animation: scaleIn 0.5s ease-out;
+}
+
+/* Staggered animations for cards */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+
+/* 🌿 Skeleton Loader Shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+  border-radius: 8px;
+}
+
+/* 🌿 Verified Badge */
+.verified-badge {
+  @apply inline-flex items-center gap-1 bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold;
+}
+
+/* 🌿 Gradient Headers */
+.gradient-header {
+  background: linear-gradient(135deg, #22c55e 0%, #86efac 100%);
+  @apply text-white;
+}
+
+/* 🌿 Success Pulse Animation */
+@keyframes pulse-success {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 15px rgba(34, 197, 94, 0);
+  }
+}
+
+.pulse-success {
+  animation: pulse-success 2s infinite;
+}
+
+/* ⏰ Time Slot Styles */
+.time-slot {
+  @apply px-4 py-3 rounded-lg border-2 transition-all duration-300 cursor-pointer text-center font-semibold;
+}
+
+.time-slot-available {
+  @apply border-green-300 bg-white hover:bg-green-50 hover:border-green-500 hover:shadow-md;
+}
+
+.time-slot-booked {
+  @apply border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed;
+}
+
+.time-slot-selected {
+  @apply border-green-600 bg-green-100 text-green-800 shadow-lg;
+}
+
+/* 💳 Payment Success Animation */
+@keyframes successBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.payment-success {
+  animation: successBounce 0.6s ease-out;
+}
+
+/* 🔍 Search Bar */
+.search-input {
+  @apply w-full px-5 py-3 rounded-lg border-2 border-gray-300 focus:border-wellness-green focus:ring-4 focus:ring-green-100 outline-none transition-all shadow-sm;
+}
+
+/* 📊 Stats Card */
+.stats-card {
+  @apply bg-gradient-to-br from-white to-green-50 rounded-xl shadow-lg p-6 border-2 border-green-100 hover:shadow-xl transition-all duration-300;
+}
+
+/* 🎨 Role Badge Styles */
+.role-badge-admin {
+  @apply bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-xs font-bold;
+}
+
+.role-badge-practitioner {
+  @apply bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-xs font-bold;
+}
+
+.role-badge-patient {
+  @apply bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 rounded-full text-xs font-bold;
 }

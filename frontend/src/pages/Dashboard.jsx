@@ -1,8 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { sessionService, orderService, practitionerService, recommendationService } from '../services/api';
+import AdminDashboard from './AdminDashboard';
+import PractitionerDashboard from './PractitionerDashboard';
 
 const Dashboard = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  
+  // Route to appropriate dashboard based on role
+  if (user?.role === 'admin') {
+    return <AdminDashboard />;
+  }
+  
+  if (user?.role === 'practitioner') {
+    return <PractitionerDashboard />;
+  }
+  
+  // Patient Dashboard
+  return <PatientDashboard />;
+};
+
+const PatientDashboard = () => {
   const { user } = useAuth();
   const [sessions, setSessions] = useState([]);
   const [orders, setOrders] = useState([]);
@@ -132,3 +152,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+

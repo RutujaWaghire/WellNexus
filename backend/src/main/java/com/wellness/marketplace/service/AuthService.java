@@ -38,7 +38,10 @@ public class AuthService {
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(request.getRole());
-        user.setBio(request.getBio());
+        user.setBio(request.getBio() != null ? request.getBio() : "");
+        user.setAccountStatus("PENDING");
+        user.setVerified(false);
+        user.setCreatedAt(java.time.LocalDateTime.now());
         
         user = userRepository.save(user);
         

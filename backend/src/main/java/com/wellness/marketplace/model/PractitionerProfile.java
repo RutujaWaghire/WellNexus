@@ -14,16 +14,19 @@ public class PractitionerProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(nullable = false)
     private Long userId;
-    
+
     @Column(nullable = false)
     private String specialization;
-    
+
     @Column(nullable = false)
     private Boolean verified = false;
-    
+
     @Column
     private Double rating = 0.0;
+
+    @Column
+    private Double consultationFee = 500.0;
 }

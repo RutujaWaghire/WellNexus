@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { ToastProvider } from './components/Toast';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -10,7 +11,9 @@ import Practitioners from './pages/Practitioners';
 import Products from './pages/Products';
 import Community from './pages/Community';
 import BookSession from './pages/BookSession';
+import Cart from './pages/Cart';
 import AdminVerifyPractitioners from './pages/AdminVerifyPractitioners';
+import AdminDashboard from './pages/AdminDashboard';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -44,8 +47,10 @@ function AppContent() {
           <Route path="/practitioners" element={<Practitioners />} />
           <Route path="/products" element={<Products />} />
           <Route path="/community" element={<Community />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/book-session/:practitionerId" element={<ProtectedRoute><BookSession /></ProtectedRoute>} />
+          <Route path="/admin/dashboard" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
           <Route path="/admin/verify-practitioners" element={<AdminRoute><AdminVerifyPractitioners /></AdminRoute>} />
         </Routes>
       </div>
@@ -56,7 +61,9 @@ function AppContent() {
 function App() {
   return (
     <AuthProvider>
-      <AppContent />
+      <ToastProvider>
+        <AppContent />
+      </ToastProvider>
     </AuthProvider>
   );
 }
