@@ -2,6 +2,7 @@ package com.wellness.marketplace.service;
 
 import com.wellness.marketplace.dto.UnverifiedPractitionerDTO;
 import com.wellness.marketplace.dto.PractitionerVerifyRequest;
+import com.wellness.marketplace.dto.PractitionerProfileDTO;
 import com.wellness.marketplace.model.PractitionerProfile;
 import com.wellness.marketplace.model.User;
 import com.wellness.marketplace.repository.PractitionerProfileRepository;
@@ -29,16 +30,22 @@ public class PractitionerService {
                 .orElse(null);
     }
     
-    public List<PractitionerProfile> getAllPractitioners() {
-        return practitionerRepository.findAll();
+    public List<PractitionerProfileDTO> getAllPractitioners() {
+        return practitionerRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
     
-    public List<PractitionerProfile> getVerifiedPractitioners() {
-        return practitionerRepository.findByVerified(true);
+    public List<PractitionerProfileDTO> getVerifiedPractitioners() {
+        return practitionerRepository.findByVerified(true).stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
     
-    public List<PractitionerProfile> getPractitionersBySpecialization(String specialization) {
-        return practitionerRepository.findBySpecialization(specialization);
+    public List<PractitionerProfileDTO> getPractitionersBySpecialization(String specialization) {
+        return practitionerRepository.findBySpecialization(specialization).stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
     
     public PractitionerProfile verifyPractitioner(Long id) {
@@ -99,5 +106,22 @@ public class PractitionerService {
         profile.setVerified(true); // Verified by admin during creation
         
         return practitionerRepository.save(profile);
+    }
+    
+    private PractitionerProfileDTO convertToDTO(PractitionerProfile profile) {
+        User user = userRepository.findById(profile.getUserId())
+                .orElse(null);
+        
+        PractitionerProfileDTO dto = new PractitionerProfileDTO();
+        dto.setId(profile.getId());
+        dto.setUserId(profile.getUserId());
+        dto.setName(user != null ? user.getName() : "Unknown");
+        dto.setSpecialization(profile.getSpecialization());
+        dto.setVerified(profile.getVerified());
+        dto.setRating(profile.getRating());
+        dto.setConsultationFee(profile.getConsultationFee());
+        dto.setBio(user != null ? user.getBio() : "");
+        
+        return dto;
     }
 }

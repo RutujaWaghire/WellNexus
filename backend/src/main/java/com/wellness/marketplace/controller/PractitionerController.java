@@ -2,6 +2,7 @@ package com.wellness.marketplace.controller;
 
 import com.wellness.marketplace.dto.UnverifiedPractitionerDTO;
 import com.wellness.marketplace.dto.PractitionerVerifyRequest;
+import com.wellness.marketplace.dto.PractitionerProfileDTO;
 import com.wellness.marketplace.model.PractitionerProfile;
 import com.wellness.marketplace.service.PractitionerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,12 @@ public class PractitionerController {
     }
     
     @GetMapping
-    public ResponseEntity<List<PractitionerProfile>> getAllPractitioners() {
+    public ResponseEntity<List<PractitionerProfileDTO>> getAllPractitioners() {
         return ResponseEntity.ok(practitionerService.getAllPractitioners());
     }
     
     @GetMapping("/verified")
-    public ResponseEntity<List<PractitionerProfile>> getVerifiedPractitioners() {
+    public ResponseEntity<List<PractitionerProfileDTO>> getVerifiedPractitioners() {
         return ResponseEntity.ok(practitionerService.getVerifiedPractitioners());
     }
     
@@ -43,7 +44,7 @@ public class PractitionerController {
     }
     
     @GetMapping("/specialization/{specialization}")
-    public ResponseEntity<List<PractitionerProfile>> getPractitionersBySpecialization(@PathVariable String specialization) {
+    public ResponseEntity<List<PractitionerProfileDTO>> getPractitionersBySpecialization(@PathVariable String specialization) {
         return ResponseEntity.ok(practitionerService.getPractitionersBySpecialization(specialization));
     }
     

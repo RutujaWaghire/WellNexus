@@ -12,6 +12,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Service
 public class AuthService {
@@ -28,7 +31,10 @@ public class AuthService {
     @Autowired
     private AuthenticationManager authenticationManager;
     
-    public AuthResponse register(RegisterRequest request) {
+    @Autowired
+    private PractitionerDocumentService documentService;
+    
+    public AuthResponse register(RegisterRequest request, MultipartFile documentFile) {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("Email already exists");
         }
@@ -44,6 +50,15 @@ public class AuthService {
         user.setCreatedAt(java.time.LocalDateTime.now());
         
         user = userRepository.save(user);
+        
+        // Handle document upload for practitioners
+        if ("practitioner".equals(request.getRole()) && documentFile != null && !documentFile.isEmpty()) {
+            try {
+                documentService.uploadDocument(user.getId(), request.getDocumentType(), documentFile);
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to upload document: " + e.getMessage());
+            }
+        }
         
         String token = jwtUtil.generateToken(user.getEmail(), user.getRole());
         String refreshToken = jwtUtil.generateRefreshToken(user.getEmail());

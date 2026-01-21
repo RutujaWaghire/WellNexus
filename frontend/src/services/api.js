@@ -21,7 +21,18 @@ api.interceptors.request.use(
 );
 
 export const authService = {
-  register: (data) => api.post('/auth/register', data),
+  register: (data) => {
+    // Check if data is FormData (for practitioner with document)
+    if (data instanceof FormData) {
+      return axios.post(`${API_BASE_URL}/auth/register`, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+    }
+    // Otherwise use regular JSON
+    return api.post('/auth/register', data);
+  },
   login: (data) => api.post('/auth/login', data),
 };
 

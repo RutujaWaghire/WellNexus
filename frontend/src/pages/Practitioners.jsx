@@ -45,6 +45,7 @@ const Practitioners = () => {
 
     const filtered = practitioners.filter(p =>
       p.specialization.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       p.userId.toString().includes(searchTerm)
     );
     setFilteredPractitioners(filtered);
@@ -146,7 +147,7 @@ const Practitioners = () => {
             verified: true,
             sortBy: true
           }}
-          placeholder="Search by specialization or practitioner ID..."
+          placeholder="Search by name, specialization, or practitioner ID..."
         />
 
         {/* Practitioners Grid */}
@@ -167,7 +168,7 @@ const Practitioners = () => {
                     </div>
                     <div>
                       <h3 className="text-xl font-bold text-gray-800">
-                        Practitioner #{practitioner.userId}
+                        {practitioner.name || `Practitioner #${practitioner.userId}`}
                       </h3>
                       <p className="text-sm text-gray-500">
                         ID: {practitioner.id}
