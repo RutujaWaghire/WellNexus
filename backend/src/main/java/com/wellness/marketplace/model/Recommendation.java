@@ -30,4 +30,20 @@ public class Recommendation {
     
     @Column(nullable = false)
     private LocalDateTime timestamp;
+    
+    // External API enriched data
+    @Column(columnDefinition = "TEXT")
+    private String fdaDrugInfo; // JSON data from OpenFDA
+    
+    @Column(columnDefinition = "TEXT")
+    private String whoGuidelines; // JSON data from WHO
+    
+    @Column(columnDefinition = "TEXT")
+    private String fitnessData; // JSON data from Fitness API
+    
+    @Column(columnDefinition = "TEXT")
+    private String enrichedDescription; // Human-readable enriched recommendation
+    
+    @Column
+    private String confidenceLevel; // HIGH, MEDIUM, LOW
 }

@@ -91,4 +91,14 @@ export const notificationService = {
   markAsRead: (id) => api.put(`/notifications/${id}/read`),
 };
 
+export const analyticsService = {
+  getDashboard: (days = 30) => api.get(`/analytics/dashboard?days=${days}`),
+  getUserAnalytics: (userId) => api.get(`/analytics/user/${userId}`),
+  getAnalyticsByDateRange: (startDate, endDate) => api.get(`/analytics/range?startDate=${startDate}&endDate=${endDate}`),
+  getAPIIntegrations: () => api.get('/analytics/api-integrations'),
+  initializeAPIIntegration: (apiName, endpoint) => api.post(`/analytics/api-integrations/init?apiName=${apiName}&endpoint=${endpoint}`),
+  recordMetric: (metricName, metricValue, timeFrame, category) => api.post(`/analytics/metrics?metricName=${metricName}&metricValue=${metricValue}&timeFrame=${timeFrame}&category=${category}`),
+  getMetricsByCategory: (category, startDate, endDate) => api.get(`/analytics/metrics/${category}?startDate=${startDate}&endDate=${endDate}`),
+};
+
 export default api;

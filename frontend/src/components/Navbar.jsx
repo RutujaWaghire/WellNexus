@@ -49,6 +49,10 @@ const Navbar = () => {
               {user ? (
                 <>
                   <Link to="/dashboard" className="hover:text-green-100 transition font-medium">Dashboard</Link>
+                  <Link to="/recommendations" className="bg-indigo-500/90 px-4 py-2 rounded-lg hover:bg-indigo-600 transition font-semibold flex items-center gap-2">
+                    <span>🧠</span>
+                    <span>AI Health</span>
+                  </Link>
                   {user.role === 'admin' && (
                     <>
                       <Link to="/admin/dashboard" className="bg-purple-500/90 px-4 py-2 rounded-lg hover:bg-purple-600 transition font-semibold flex items-center gap-2">
@@ -57,6 +61,10 @@ const Navbar = () => {
                       </Link>
                       <Link to="/admin/verify-practitioners" className="bg-white/20 px-4 py-2 rounded-lg hover:bg-white/30 transition font-semibold">
                         ✓ Verify
+                      </Link>
+                      <Link to="/admin/analytics" className="bg-teal-500/90 px-4 py-2 rounded-lg hover:bg-teal-600 transition font-semibold flex items-center gap-2">
+                        <span>📊</span>
+                        <span>Analytics</span>
                       </Link>
                     </>
                   )}

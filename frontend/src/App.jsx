@@ -14,6 +14,8 @@ import BookSession from './pages/BookSession';
 import Cart from './pages/Cart';
 import AdminVerifyPractitioners from './pages/AdminVerifyPractitioners';
 import AdminDashboard from './pages/AdminDashboard';
+import AnalyticsDashboard from './pages/AnalyticsDashboard';
+import RecommendationPage from './pages/RecommendationPage';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -49,9 +51,10 @@ function AppContent() {
           <Route path="/community" element={<Community />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-          <Route path="/book-session/:practitionerId" element={<ProtectedRoute><BookSession /></ProtectedRoute>} />
+          <Route path="/recommendations" element={<ProtectedRoute><RecommendationPage /></ProtectedRoute>} />
           <Route path="/admin/dashboard" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
           <Route path="/admin/verify-practitioners" element={<AdminRoute><AdminVerifyPractitioners /></AdminRoute>} />
+          <Route path="/admin/analytics" element={<AdminRoute><AnalyticsDashboard /></AdminRoute>} />
         </Routes>
       </div>
     </Router>
