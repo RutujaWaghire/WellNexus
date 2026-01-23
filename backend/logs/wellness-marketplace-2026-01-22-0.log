@@ -1,0 +1,336 @@
+2026-01-22 22:22:58 [main] INFO  c.w.m.WellnessMarketplaceApplication - Starting WellnessMarketplaceApplication using Java 17.0.11 with PID 11936 (D:\projects\RutujaUI\WellNexus\backend\target\classes started by VARSHA in D:\projects\RutujaUI\WellNexus\backend)
+2026-01-22 22:22:58 [main] INFO  c.w.m.WellnessMarketplaceApplication - Starting WellnessMarketplaceApplication using Java 17.0.11 with PID 11936 (D:\projects\RutujaUI\WellNexus\backend\target\classes started by VARSHA in D:\projects\RutujaUI\WellNexus\backend)
+2026-01-22 22:22:58 [main] DEBUG c.w.m.WellnessMarketplaceApplication - Running with Spring Boot v3.1.5, Spring v6.0.13
+2026-01-22 22:22:58 [main] DEBUG c.w.m.WellnessMarketplaceApplication - Running with Spring Boot v3.1.5, Spring v6.0.13
+2026-01-22 22:22:59 [main] INFO  c.w.m.WellnessMarketplaceApplication - No active profile set, falling back to 1 default profile: "default"
+2026-01-22 22:22:59 [main] INFO  c.w.m.WellnessMarketplaceApplication - No active profile set, falling back to 1 default profile: "default"
+2026-01-22 22:22:59 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-01-22 22:22:59 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 173 ms. Found 14 JPA repository interfaces.
+2026-01-22 22:23:00 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2026-01-22 22:23:00 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-01-22 22:23:00 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.15]
+2026-01-22 22:23:00 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-01-22 22:23:00 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1769 ms
+2026-01-22 22:23:01 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-01-22 22:23:01 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.13.Final
+2026-01-22 22:23:01 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2026-01-22 22:23:01 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-01-22 22:23:01 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-01-22 22:23:01 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6ebbc06
+2026-01-22 22:23:01 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-01-22 22:23:02 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-01-22 22:23:02 [main] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-01-22 22:23:03 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-01-22 22:23:03 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-01-22 22:23:03 [main] DEBUG c.w.m.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-01-22 22:23:03 [main] DEBUG c.w.m.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-01-22 22:23:03 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-01-22 22:23:04 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-22 22:23:05 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3644d305, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3fc261b7, org.springframework.security.web.context.SecurityContextHolderFilter@5e4874ae, org.springframework.security.web.header.HeaderWriterFilter@bb0dcb6, org.springframework.web.filter.CorsFilter@11101f62, org.springframework.security.web.authentication.logout.LogoutFilter@352df548, com.wellness.marketplace.security.JwtAuthenticationFilter@481eb705, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@13b666b4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@644a12be, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3fd64d6b, org.springframework.security.web.session.SessionManagementFilter@312eb, org.springframework.security.web.access.ExceptionTranslationFilter@55e073c8, org.springframework.security.web.access.intercept.AuthorizationFilter@2495a351]
+2026-01-22 22:23:05 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2026-01-22 22:23:05 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
+2026-01-22 22:23:05 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3be94b12]]
+2026-01-22 22:23:05 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
+2026-01-22 22:23:05 [main] INFO  c.w.m.WellnessMarketplaceApplication - Started WellnessMarketplaceApplication in 6.926 seconds (process running for 7.85)
+2026-01-22 22:23:05 [main] INFO  c.w.m.WellnessMarketplaceApplication - Started WellnessMarketplaceApplication in 6.926 seconds (process running for 7.85)
+2026-01-22 22:24:05 [MessageBroker-1] INFO  o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2026-01-22 22:27:23 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-01-22 22:27:23 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-01-22 22:27:23 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-01-22 22:27:23 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/auth/login
+2026-01-22 22:27:24 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/auth/login
+2026-01-22 22:27:24 [http-nio-8080-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-01-22 22:27:24 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/auth/login
+2026-01-22 22:27:24 [http-nio-8080-exec-2] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2026-01-22 22:27:24 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/practitioners
+2026-01-22 22:27:24 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/practitioners
+2026-01-22 22:27:24 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/practitioners
+2026-01-22 22:27:24 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/practitioners
+2026-01-22 22:27:24 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/practitioners
+2026-01-22 22:27:24 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/practitioners
+2026-01-22 22:28:17 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/auth/login
+2026-01-22 22:28:17 [http-nio-8080-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-01-22 22:28:17 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/auth/login
+2026-01-22 22:28:17 [http-nio-8080-exec-7] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2026-01-22 22:28:54 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/auth/login
+2026-01-22 22:28:54 [http-nio-8080-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-01-22 22:28:54 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/auth/login
+2026-01-22 22:28:55 [http-nio-8080-exec-9] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2026-01-22 22:28:55 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/sessions/user/2
+2026-01-22 22:28:55 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/sessions/user/2
+2026-01-22 22:28:55 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/sessions/user/2
+2026-01-22 22:28:55 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/sessions/user/2
+2026-01-22 22:28:55 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/sessions/user/2
+2026-01-22 22:28:55 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/orders/user/2
+2026-01-22 22:28:55 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/orders/user/2
+2026-01-22 22:28:55 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/sessions/user/2
+2026-01-22 22:28:55 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/orders/user/2
+2026-01-22 22:28:55 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/orders/user/2
+2026-01-22 22:28:55 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/recommendations/user/2
+2026-01-22 22:28:55 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/recommendations/user/2
+2026-01-22 22:28:55 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/orders/user/2
+2026-01-22 22:28:55 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/recommendations/user/2
+2026-01-22 22:28:55 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/recommendations/user/2
+2026-01-22 22:28:55 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/recommendations/user/2
+2026-01-22 22:29:16 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/recommendations
+2026-01-22 22:29:16 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/recommendations
+2026-01-22 22:29:16 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/recommendations
+2026-01-22 22:29:16 [http-nio-8080-exec-10] INFO  c.w.m.service.RecommendationService - Recommendation enriched with external API data for symptom: neck pain
+2026-01-22 22:29:16 [http-nio-8080-exec-10] INFO  c.w.m.service.RecommendationService - Recommendation enriched with external API data for symptom: neck pain
+2026-01-22 22:29:16 [http-nio-8080-exec-10] INFO  c.w.m.service.NotificationService - Notification created for user 2 with type New Health Recommendation
+2026-01-22 22:29:16 [http-nio-8080-exec-10] INFO  c.w.m.service.NotificationService - Notification created for user 2 with type New Health Recommendation
+2026-01-22 22:29:16 [http-nio-8080-exec-10] INFO  c.w.m.service.RecommendationService - Generated recommendation for user 2 with symptom neck pain
+2026-01-22 22:29:16 [http-nio-8080-exec-10] INFO  c.w.m.service.RecommendationService - Generated recommendation for user 2 with symptom neck pain
+2026-01-22 22:29:16 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/sessions/user/2
+2026-01-22 22:29:16 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/sessions/user/2
+2026-01-22 22:29:16 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/orders/user/2
+2026-01-22 22:29:16 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/orders/user/2
+2026-01-22 22:29:16 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/recommendations/user/2
+2026-01-22 22:29:16 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/recommendations/user/2
+2026-01-22 22:29:32 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/recommendations
+2026-01-22 22:29:32 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/recommendations
+2026-01-22 22:29:32 [http-nio-8080-exec-6] INFO  c.w.m.service.RecommendationService - Recommendation enriched with external API data for symptom: back pain
+2026-01-22 22:29:32 [http-nio-8080-exec-6] INFO  c.w.m.service.RecommendationService - Recommendation enriched with external API data for symptom: back pain
+2026-01-22 22:29:32 [http-nio-8080-exec-6] INFO  c.w.m.service.NotificationService - Notification created for user 2 with type New Health Recommendation
+2026-01-22 22:29:32 [http-nio-8080-exec-6] INFO  c.w.m.service.NotificationService - Notification created for user 2 with type New Health Recommendation
+2026-01-22 22:29:32 [http-nio-8080-exec-6] INFO  c.w.m.service.RecommendationService - Generated recommendation for user 2 with symptom back pain
+2026-01-22 22:29:32 [http-nio-8080-exec-6] INFO  c.w.m.service.RecommendationService - Generated recommendation for user 2 with symptom back pain
+2026-01-22 22:29:32 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/sessions/user/2
+2026-01-22 22:29:32 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/sessions/user/2
+2026-01-22 22:29:32 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/orders/user/2
+2026-01-22 22:29:32 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/orders/user/2
+2026-01-22 22:29:32 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/recommendations/user/2
+2026-01-22 22:29:32 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/recommendations/user/2
+2026-01-22 22:31:14 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/auth/login
+2026-01-22 22:31:14 [http-nio-8080-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-01-22 22:31:14 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/auth/login
+2026-01-22 22:31:14 [http-nio-8080-exec-10] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2026-01-22 22:31:14 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/practitioners
+2026-01-22 22:31:14 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/practitioners
+2026-01-22 22:31:14 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/practitioners
+2026-01-22 22:31:15 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/practitioners
+2026-01-22 22:33:57 [main] INFO  c.w.m.WellnessMarketplaceApplication - Starting WellnessMarketplaceApplication using Java 17.0.11 with PID 8800 (D:\projects\RutujaUI\WellNexus\backend\target\classes started by VARSHA in D:\projects\RutujaUI\WellNexus\backend)
+2026-01-22 22:33:57 [main] INFO  c.w.m.WellnessMarketplaceApplication - Starting WellnessMarketplaceApplication using Java 17.0.11 with PID 8800 (D:\projects\RutujaUI\WellNexus\backend\target\classes started by VARSHA in D:\projects\RutujaUI\WellNexus\backend)
+2026-01-22 22:33:57 [main] DEBUG c.w.m.WellnessMarketplaceApplication - Running with Spring Boot v3.1.5, Spring v6.0.13
+2026-01-22 22:33:57 [main] DEBUG c.w.m.WellnessMarketplaceApplication - Running with Spring Boot v3.1.5, Spring v6.0.13
+2026-01-22 22:33:57 [main] INFO  c.w.m.WellnessMarketplaceApplication - No active profile set, falling back to 1 default profile: "default"
+2026-01-22 22:33:57 [main] INFO  c.w.m.WellnessMarketplaceApplication - No active profile set, falling back to 1 default profile: "default"
+2026-01-22 22:33:58 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-01-22 22:33:58 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 194 ms. Found 14 JPA repository interfaces.
+2026-01-22 22:33:59 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2026-01-22 22:33:59 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-01-22 22:33:59 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.15]
+2026-01-22 22:33:59 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-01-22 22:33:59 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1783 ms
+2026-01-22 22:33:59 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-01-22 22:33:59 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.13.Final
+2026-01-22 22:33:59 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2026-01-22 22:33:59 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-01-22 22:33:59 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-01-22 22:33:59 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@8debe42
+2026-01-22 22:33:59 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-01-22 22:34:00 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-01-22 22:34:00 [main] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-01-22 22:34:01 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-01-22 22:34:01 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-01-22 22:34:01 [main] DEBUG c.w.m.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-01-22 22:34:01 [main] DEBUG c.w.m.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-01-22 22:34:01 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-01-22 22:34:02 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-22 22:34:02 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@376ba8e3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5434de8, org.springframework.security.web.context.SecurityContextHolderFilter@b09df69, org.springframework.security.web.header.HeaderWriterFilter@e73787, org.springframework.web.filter.CorsFilter@2c84d6c4, org.springframework.security.web.authentication.logout.LogoutFilter@359ae83a, com.wellness.marketplace.security.JwtAuthenticationFilter@34907a49, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@623dac3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2763500e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2a2d0cff, org.springframework.security.web.session.SessionManagementFilter@397ff526, org.springframework.security.web.access.ExceptionTranslationFilter@3c79071e, org.springframework.security.web.access.intercept.AuthorizationFilter@2692910f]
+2026-01-22 22:34:03 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2026-01-22 22:34:03 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
+2026-01-22 22:34:03 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2c4da654]]
+2026-01-22 22:34:03 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
+2026-01-22 22:34:03 [main] INFO  c.w.m.WellnessMarketplaceApplication - Started WellnessMarketplaceApplication in 6.237 seconds (process running for 6.875)
+2026-01-22 22:34:03 [main] INFO  c.w.m.WellnessMarketplaceApplication - Started WellnessMarketplaceApplication in 6.237 seconds (process running for 6.875)
+2026-01-22 22:34:35 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-01-22 22:34:35 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-01-22 22:34:35 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-01-22 22:34:35 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/practitioners
+2026-01-22 22:34:35 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/practitioners
+2026-01-22 22:34:35 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/practitioners
+2026-01-22 22:34:35 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/practitioners
+2026-01-22 22:34:43 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/analytics/dashboard?days=30
+2026-01-22 22:34:43 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/analytics/api-integrations
+2026-01-22 22:34:43 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/analytics/dashboard?days=30
+2026-01-22 22:34:43 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/analytics/api-integrations
+2026-01-22 22:34:43 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/analytics/dashboard?days=30
+2026-01-22 22:34:43 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/analytics/api-integrations
+2026-01-22 22:34:43 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/analytics/dashboard?days=30
+2026-01-22 22:34:43 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/analytics/api-integrations
+2026-01-22 22:34:43 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/analytics/api-integrations
+2026-01-22 22:34:43 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/analytics/api-integrations
+2026-01-22 22:34:43 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/analytics/dashboard?days=30
+2026-01-22 22:34:43 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/analytics/dashboard?days=30
+2026-01-22 22:35:02 [MessageBroker-1] INFO  o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2026-01-22 22:35:05 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/analytics/dashboard?days=7
+2026-01-22 22:35:05 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/analytics/api-integrations
+2026-01-22 22:35:05 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/analytics/dashboard?days=7
+2026-01-22 22:35:05 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/analytics/api-integrations
+2026-01-22 22:35:05 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/analytics/dashboard?days=7
+2026-01-22 22:35:13 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/practitioners
+2026-01-22 22:35:13 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/practitioners
+2026-01-22 22:35:13 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/practitioners
+2026-01-22 22:35:13 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/practitioners
+2026-01-22 22:35:31 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/auth/login
+2026-01-22 22:35:31 [http-nio-8080-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-01-22 22:35:31 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/auth/login
+2026-01-22 22:35:31 [http-nio-8080-exec-7] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2026-01-22 22:35:31 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/sessions/user/2
+2026-01-22 22:35:31 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/sessions/user/2
+2026-01-22 22:35:31 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/sessions/user/2
+2026-01-22 22:35:31 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/orders/user/2
+2026-01-22 22:35:31 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/sessions/user/2
+2026-01-22 22:35:31 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/orders/user/2
+2026-01-22 22:35:31 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/orders/user/2
+2026-01-22 22:35:31 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/recommendations/user/2
+2026-01-22 22:35:31 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/orders/user/2
+2026-01-22 22:35:31 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/recommendations/user/2
+2026-01-22 22:35:31 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/recommendations/user/2
+2026-01-22 22:35:31 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/recommendations/user/2
+2026-01-22 22:35:53 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/recommendations
+2026-01-22 22:35:53 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/recommendations
+2026-01-22 22:35:53 [http-nio-8080-exec-8] INFO  c.w.m.service.RecommendationService - Recommendation enriched with external API data for symptom: i have throat pain, mild headache 
+2026-01-22 22:35:53 [http-nio-8080-exec-8] INFO  c.w.m.service.RecommendationService - Recommendation enriched with external API data for symptom: i have throat pain, mild headache 
+2026-01-22 22:35:53 [http-nio-8080-exec-8] INFO  c.w.m.service.NotificationService - Notification created for user 2 with type New Health Recommendation
+2026-01-22 22:35:53 [http-nio-8080-exec-8] INFO  c.w.m.service.NotificationService - Notification created for user 2 with type New Health Recommendation
+2026-01-22 22:35:53 [http-nio-8080-exec-8] INFO  c.w.m.service.RecommendationService - Generated recommendation for user 2 with symptom i have throat pain, mild headache 
+2026-01-22 22:35:53 [http-nio-8080-exec-8] INFO  c.w.m.service.RecommendationService - Generated recommendation for user 2 with symptom i have throat pain, mild headache 
+2026-01-22 22:35:54 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/sessions/user/2
+2026-01-22 22:35:54 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/sessions/user/2
+2026-01-22 22:35:54 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/orders/user/2
+2026-01-22 22:35:54 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/orders/user/2
+2026-01-22 22:35:54 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/recommendations/user/2
+2026-01-22 22:35:54 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/recommendations/user/2
+2026-01-22 22:36:20 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/recommendations
+2026-01-22 22:36:20 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/recommendations
+2026-01-22 22:36:20 [http-nio-8080-exec-9] INFO  c.w.m.service.RecommendationService - Recommendation enriched with external API data for symptom: hip muscle pain
+2026-01-22 22:36:20 [http-nio-8080-exec-9] INFO  c.w.m.service.RecommendationService - Recommendation enriched with external API data for symptom: hip muscle pain
+2026-01-22 22:36:20 [http-nio-8080-exec-9] INFO  c.w.m.service.NotificationService - Notification created for user 2 with type New Health Recommendation
+2026-01-22 22:36:20 [http-nio-8080-exec-9] INFO  c.w.m.service.NotificationService - Notification created for user 2 with type New Health Recommendation
+2026-01-22 22:36:20 [http-nio-8080-exec-9] INFO  c.w.m.service.RecommendationService - Generated recommendation for user 2 with symptom hip muscle pain
+2026-01-22 22:36:20 [http-nio-8080-exec-9] INFO  c.w.m.service.RecommendationService - Generated recommendation for user 2 with symptom hip muscle pain
+2026-01-22 22:36:20 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/sessions/user/2
+2026-01-22 22:36:20 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/sessions/user/2
+2026-01-22 22:36:20 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/orders/user/2
+2026-01-22 22:36:20 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/orders/user/2
+2026-01-22 22:36:20 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/recommendations/user/2
+2026-01-22 22:36:20 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/recommendations/user/2
+2026-01-22 22:47:04 [main] INFO  c.w.m.WellnessMarketplaceApplication - Starting WellnessMarketplaceApplication using Java 17.0.11 with PID 19508 (D:\projects\RutujaUI\WellNexus\backend\target\classes started by VARSHA in D:\projects\RutujaUI\WellNexus\backend)
+2026-01-22 22:47:04 [main] INFO  c.w.m.WellnessMarketplaceApplication - Starting WellnessMarketplaceApplication using Java 17.0.11 with PID 19508 (D:\projects\RutujaUI\WellNexus\backend\target\classes started by VARSHA in D:\projects\RutujaUI\WellNexus\backend)
+2026-01-22 22:47:04 [main] DEBUG c.w.m.WellnessMarketplaceApplication - Running with Spring Boot v3.1.5, Spring v6.0.13
+2026-01-22 22:47:04 [main] DEBUG c.w.m.WellnessMarketplaceApplication - Running with Spring Boot v3.1.5, Spring v6.0.13
+2026-01-22 22:47:04 [main] INFO  c.w.m.WellnessMarketplaceApplication - No active profile set, falling back to 1 default profile: "default"
+2026-01-22 22:47:04 [main] INFO  c.w.m.WellnessMarketplaceApplication - No active profile set, falling back to 1 default profile: "default"
+2026-01-22 22:47:05 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-01-22 22:47:05 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 165 ms. Found 14 JPA repository interfaces.
+2026-01-22 22:47:05 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2026-01-22 22:47:05 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-01-22 22:47:05 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.15]
+2026-01-22 22:47:05 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-01-22 22:47:05 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1734 ms
+2026-01-22 22:47:06 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-01-22 22:47:06 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.13.Final
+2026-01-22 22:47:06 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2026-01-22 22:47:06 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-01-22 22:47:06 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-01-22 22:47:06 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4fdac2a7
+2026-01-22 22:47:06 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-01-22 22:47:06 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-01-22 22:47:06 [main] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-01-22 22:47:07 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-01-22 22:47:08 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-01-22 22:47:08 [main] DEBUG c.w.m.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-01-22 22:47:08 [main] DEBUG c.w.m.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-01-22 22:47:08 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-01-22 22:47:09 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-22 22:47:09 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4a842e8a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6b909973, org.springframework.security.web.context.SecurityContextHolderFilter@294ffc88, org.springframework.security.web.header.HeaderWriterFilter@793af433, org.springframework.web.filter.CorsFilter@458044df, org.springframework.security.web.authentication.logout.LogoutFilter@12039ae0, com.wellness.marketplace.security.JwtAuthenticationFilter@42a89cef, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2b5a659f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1540b926, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@f4cfc61, org.springframework.security.web.session.SessionManagementFilter@78571a17, org.springframework.security.web.access.ExceptionTranslationFilter@4644b1c6, org.springframework.security.web.access.intercept.AuthorizationFilter@45ec9b22]
+2026-01-22 22:47:09 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2026-01-22 22:47:09 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
+2026-01-22 22:47:09 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@757b8c47]]
+2026-01-22 22:47:09 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
+2026-01-22 22:47:09 [main] INFO  c.w.m.WellnessMarketplaceApplication - Started WellnessMarketplaceApplication in 6.225 seconds (process running for 7.059)
+2026-01-22 22:47:09 [main] INFO  c.w.m.WellnessMarketplaceApplication - Started WellnessMarketplaceApplication in 6.225 seconds (process running for 7.059)
+2026-01-22 22:48:09 [MessageBroker-1] INFO  o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2026-01-22 22:54:27 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-01-22 22:54:27 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-01-22 22:54:27 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2026-01-22 22:54:27 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/auth/login
+2026-01-22 22:54:28 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/auth/login
+2026-01-22 22:54:28 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-01-22 22:54:28 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/auth/login
+2026-01-22 22:54:28 [http-nio-8080-exec-4] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2026-01-22 22:54:28 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/sessions/user/2
+2026-01-22 22:54:28 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/sessions/user/2
+2026-01-22 22:54:28 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/sessions/user/2
+2026-01-22 22:54:28 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/sessions/user/2
+2026-01-22 22:54:28 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/sessions/user/2
+2026-01-22 22:54:28 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/orders/user/2
+2026-01-22 22:54:28 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/orders/user/2
+2026-01-22 22:54:28 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/sessions/user/2
+2026-01-22 22:54:28 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/orders/user/2
+2026-01-22 22:54:28 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/orders/user/2
+2026-01-22 22:54:28 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/recommendations/user/2
+2026-01-22 22:54:28 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/recommendations/user/2
+2026-01-22 22:54:28 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/orders/user/2
+2026-01-22 22:54:28 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/recommendations/user/2
+2026-01-22 22:54:28 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/recommendations/user/2
+2026-01-22 22:54:28 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/recommendations/user/2
+2026-01-22 22:54:40 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/recommendations
+2026-01-22 22:54:40 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/recommendations
+2026-01-22 22:54:40 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/recommendations
+2026-01-22 22:54:40 [http-nio-8080-exec-7] INFO  c.w.m.service.RecommendationService - Recommendation enriched with external API data from 0 sources for symptom: leg pain
+2026-01-22 22:54:40 [http-nio-8080-exec-7] INFO  c.w.m.service.RecommendationService - Recommendation enriched with external API data from 0 sources for symptom: leg pain
+2026-01-22 22:54:40 [http-nio-8080-exec-7] INFO  c.w.m.service.NotificationService - Notification created for user 2 with type New Health Recommendation
+2026-01-22 22:54:40 [http-nio-8080-exec-7] INFO  c.w.m.service.NotificationService - Notification created for user 2 with type New Health Recommendation
+2026-01-22 22:54:40 [http-nio-8080-exec-7] INFO  c.w.m.service.RecommendationService - Generated recommendation for user 2 with symptom leg pain
+2026-01-22 22:54:40 [http-nio-8080-exec-7] INFO  c.w.m.service.RecommendationService - Generated recommendation for user 2 with symptom leg pain
+2026-01-22 22:54:40 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/sessions/user/2
+2026-01-22 22:54:40 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/sessions/user/2
+2026-01-22 22:54:40 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/orders/user/2
+2026-01-22 22:54:40 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/orders/user/2
+2026-01-22 22:54:40 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/recommendations/user/2
+2026-01-22 22:54:40 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/recommendations/user/2
+2026-01-22 22:55:01 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/recommendations
+2026-01-22 22:55:01 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/recommendations
+2026-01-22 22:55:01 [http-nio-8080-exec-1] INFO  c.w.m.service.RecommendationService - Recommendation enriched with external API data from 0 sources for symptom: eye
+2026-01-22 22:55:01 [http-nio-8080-exec-1] INFO  c.w.m.service.RecommendationService - Recommendation enriched with external API data from 0 sources for symptom: eye
+2026-01-22 22:55:01 [http-nio-8080-exec-1] INFO  c.w.m.service.NotificationService - Notification created for user 2 with type New Health Recommendation
+2026-01-22 22:55:01 [http-nio-8080-exec-1] INFO  c.w.m.service.NotificationService - Notification created for user 2 with type New Health Recommendation
+2026-01-22 22:55:01 [http-nio-8080-exec-1] INFO  c.w.m.service.RecommendationService - Generated recommendation for user 2 with symptom eye
+2026-01-22 22:55:01 [http-nio-8080-exec-1] INFO  c.w.m.service.RecommendationService - Generated recommendation for user 2 with symptom eye
+2026-01-22 22:55:01 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/sessions/user/2
+2026-01-22 22:55:01 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/sessions/user/2
+2026-01-22 22:55:01 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/orders/user/2
+2026-01-22 22:55:01 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/orders/user/2
+2026-01-22 22:55:01 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/recommendations/user/2
+2026-01-22 22:55:01 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/recommendations/user/2
+2026-01-22 22:55:13 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/recommendations
+2026-01-22 22:55:13 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/recommendations
+2026-01-22 22:55:13 [http-nio-8080-exec-7] INFO  c.w.m.service.RecommendationService - Recommendation enriched with external API data from 0 sources for symptom: body ache
+2026-01-22 22:55:13 [http-nio-8080-exec-7] INFO  c.w.m.service.RecommendationService - Recommendation enriched with external API data from 0 sources for symptom: body ache
+2026-01-22 22:55:13 [http-nio-8080-exec-7] INFO  c.w.m.service.NotificationService - Notification created for user 2 with type New Health Recommendation
+2026-01-22 22:55:13 [http-nio-8080-exec-7] INFO  c.w.m.service.NotificationService - Notification created for user 2 with type New Health Recommendation
+2026-01-22 22:55:13 [http-nio-8080-exec-7] INFO  c.w.m.service.RecommendationService - Generated recommendation for user 2 with symptom body ache
+2026-01-22 22:55:13 [http-nio-8080-exec-7] INFO  c.w.m.service.RecommendationService - Generated recommendation for user 2 with symptom body ache
+2026-01-22 22:55:13 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/sessions/user/2
+2026-01-22 22:55:13 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/sessions/user/2
+2026-01-22 22:55:13 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/orders/user/2
+2026-01-22 22:55:13 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/orders/user/2
+2026-01-22 22:55:13 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/recommendations/user/2
+2026-01-22 22:55:13 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/recommendations/user/2
+2026-01-22 22:55:24 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/recommendations
+2026-01-22 22:55:24 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/recommendations
+2026-01-22 22:55:24 [http-nio-8080-exec-1] INFO  c.w.m.service.RecommendationService - Recommendation enriched with external API data from 0 sources for symptom: acupuncture
+2026-01-22 22:55:24 [http-nio-8080-exec-1] INFO  c.w.m.service.RecommendationService - Recommendation enriched with external API data from 0 sources for symptom: acupuncture
+2026-01-22 22:55:24 [http-nio-8080-exec-1] INFO  c.w.m.service.NotificationService - Notification created for user 2 with type New Health Recommendation
+2026-01-22 22:55:24 [http-nio-8080-exec-1] INFO  c.w.m.service.NotificationService - Notification created for user 2 with type New Health Recommendation
+2026-01-22 22:55:24 [http-nio-8080-exec-1] INFO  c.w.m.service.RecommendationService - Generated recommendation for user 2 with symptom acupuncture
+2026-01-22 22:55:24 [http-nio-8080-exec-1] INFO  c.w.m.service.RecommendationService - Generated recommendation for user 2 with symptom acupuncture
+2026-01-22 22:55:24 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/sessions/user/2
+2026-01-22 22:55:24 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/sessions/user/2
+2026-01-22 22:55:24 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/orders/user/2
+2026-01-22 22:55:24 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/orders/user/2
+2026-01-22 22:55:24 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/recommendations/user/2
+2026-01-22 22:55:24 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/recommendations/user/2

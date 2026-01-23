@@ -82,6 +82,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/practitioners/*/verify").hasRole("ADMIN")
                 .requestMatchers("/api/practitioners/admin/verify").hasRole("ADMIN")
                 .requestMatchers("/api/questions/**").permitAll()
+                .requestMatchers("/api/recommendations/**").authenticated()
                 .anyRequest().authenticated()
             )
             .authenticationProvider(authenticationProvider())

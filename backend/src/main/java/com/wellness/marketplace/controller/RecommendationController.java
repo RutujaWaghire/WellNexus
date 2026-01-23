@@ -6,6 +6,8 @@ import com.wellness.marketplace.service.RecommendationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -15,6 +17,8 @@ import java.util.stream.Collectors;
 //@CrossOrigin(origins = "*")
 public class RecommendationController {
     
+    private static final Logger logger = LoggerFactory.getLogger(RecommendationController.class);
+    
     @Autowired
     private RecommendationService recommendationService;
     
@@ -23,10 +27,37 @@ public class RecommendationController {
      */
     @PostMapping
     public ResponseEntity<RecommendationDTO> generateRecommendation(@RequestBody Map<String, Object> request) {
-        Long userId = Long.valueOf(request.get("userId").toString());
-        String symptom = request.get("symptom").toString();
-        Recommendation recommendation = recommendationService.generateRecommendation(userId, symptom);
-        return ResponseEntity.ok(convertToDTO(recommendation));
+        logger.info("Received recommendation request: {}", request);
+        
+        // Validate required fields
+        if (request == null || !request.containsKey("userId") || !request.containsKey("symptom")) {
+            logger.error("Missing required fields. Request keys: {}", request != null ? request.keySet() : "null");
+            throw new IllegalArgumentException("Missing required fields: userId and symptom are required");
+        }
+        
+        Object userIdObj = request.get("userId");
+        Object symptomObj = request.get("symptom");
+        
+        if (userIdObj == null || symptomObj == null) {
+            logger.error("Null field values - userId: {}, symptom: {}", userIdObj, symptomObj);
+            throw new IllegalArgumentException("Missing required fields: userId and symptom cannot be null");
+        }
+        
+        try {
+            Long userId = Long.valueOf(userIdObj.toString());
+            String symptom = symptomObj.toString().trim();
+            
+            if (symptom.isEmpty()) {
+                throw new IllegalArgumentException("Symptom cannot be empty");
+            }
+            
+            logger.info("Processing recommendation for userId: {}, symptom: {}", userId, symptom);
+            Recommendation recommendation = recommendationService.generateRecommendation(userId, symptom);
+            return ResponseEntity.ok(convertToDTO(recommendation));
+        } catch (NumberFormatException e) {
+            logger.error("Invalid userId format: {}", userIdObj, e);
+            throw new IllegalArgumentException("Invalid userId format");
+        }
     }
     
     /**

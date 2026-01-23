@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { analyticsService } from '../services/api';
+import { recommendationService, analyticsService } from '../services/api';
 
 export default function RecommendationPage() {
   const { user } = useAuth();
@@ -13,23 +13,16 @@ export default function RecommendationPage() {
 
   // Fetch user's previous recommendations
   useEffect(() => {
-    if (user?.id) {
+    if (user?.userId) {
       fetchUserRecommendations();
     }
-  }, [user?.id]);
+  }, [user?.userId]);
 
   const fetchUserRecommendations = async () => {
     try {
       setLoadingRecommendations(true);
-      const response = await fetch(`/api/recommendations/user/${user.id}`, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setUserRecommendations(data);
-      }
+      const response = await recommendationService.getUserRecommendations(user.userId);
+      setUserRecommendations(response.data);
     } catch (err) {
       console.error('Error fetching recommendations:', err);
     } finally {
@@ -39,6 +32,12 @@ export default function RecommendationPage() {
 
   const handleGenerateRecommendation = async (e) => {
     e.preventDefault();
+    
+    if (!user || !user.userId) {
+      setError('User not authenticated. Please log in first.');
+      return;
+    }
+    
     if (!symptom.trim()) {
       setError('Please enter a symptom');
       return;
@@ -48,24 +47,16 @@ export default function RecommendationPage() {
       setLoading(true);
       setError('');
       
-      const response = await fetch('/api/recommendations', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify({
-          userId: user.id,
-          symptom: symptom
-        })
-      });
+      const requestData = {
+        userId: user.userId,
+        symptom: symptom.trim()
+      };
+      
+      console.log('Sending recommendation request:', requestData);
+      
+      const response = await recommendationService.generate(requestData);
 
-      if (!response.ok) {
-        throw new Error('Failed to generate recommendation');
-      }
-
-      const recommendation = await response.json();
-      setRecommendations([recommendation]);
+      setRecommendations([response.data]);
       setSymptom('');
       
       // Refresh user recommendations
@@ -73,12 +64,13 @@ export default function RecommendationPage() {
       
       // Log analytics
       try {
-        await analyticsService.logAction(user.id, 'RECOMMENDATION_REQUESTED', 'Symptom: ' + symptom);
+        await analyticsService.recordMetric('RECOMMENDATION_REQUESTED', 1, 'DAILY', 'RECOMMENDATIONS');
       } catch (err) {
         console.warn('Failed to log analytics:', err);
       }
     } catch (err) {
-      setError(err.message || 'Failed to generate recommendation');
+      console.error('Recommendation error:', err);
+      setError(err.response?.data?.message || err.message || 'Failed to generate recommendation');
     } finally {
       setLoading(false);
     }
