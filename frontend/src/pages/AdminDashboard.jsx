@@ -24,8 +24,10 @@ const AdminDashboard = () => {
   });
   const [recentSessions, setRecentSessions] = useState([]);
   const [products, setProducts] = useState([]);
+  const [practitioners, setPractitioners] = useState([]);
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [showManageStock, setShowManageStock] = useState(false);
+  const [showManageRatings, setShowManageRatings] = useState(false);
   const [newProduct, setNewProduct] = useState({
     name: '',
     description: '',
@@ -56,6 +58,7 @@ const AdminDashboard = () => {
       const practitioners = practitionersRes.data;
       const sessions = sessionsRes.data;
       const orders = ordersRes.data;
+      setPractitioners(practitioners);
       setProducts(productsRes.data);
 
       // Calculate stats
@@ -122,7 +125,21 @@ const AdminDashboard = () => {
       addToast('Error updating stock', 'error');
     }
   };
+  const handleUpdateRating = async (practitionerId, newRating) => {
+    if (newRating < 0 || newRating > 5) {
+      addToast('Rating must be between 0 and 5', 'warning');
+      return;
+    }
 
+    try {
+      await practitionerService.updateRating(practitionerId, newRating);
+      addToast('Practitioner rating updated successfully!', 'success');
+      loadDashboardData();
+    } catch (error) {
+      console.error('Error updating rating:', error);
+      addToast('Failed to update rating', 'error');
+    }
+  };
   if (user?.role !== 'admin') {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -260,6 +277,13 @@ const AdminDashboard = () => {
               >
                 <span>📦</span>
                 <span>Manage Stock</span>
+              </button>
+              <button 
+                onClick={() => setShowManageRatings(true)}
+                className="w-full p-3 bg-yellow-50 hover:bg-yellow-100 rounded-lg transition flex items-center gap-2 text-left"
+              >
+                <span>⭐</span>
+                <span>Manage Ratings</span>
               </button>
             </div>
           </div>
@@ -470,6 +494,87 @@ const AdminDashboard = () => {
               <button
                 onClick={() => setShowManageStock(false)}
                 className="w-full mt-6 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg transition"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Manage Ratings Modal */}
+      {showManageRatings && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 fade-in">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 scale-in max-h-[90vh] overflow-y-auto">
+            <div className="bg-gradient-to-r from-yellow-500 to-orange-500 p-6 rounded-t-2xl text-white">
+              <h2 className="text-2xl font-bold">⭐ Manage Practitioner Ratings</h2>
+              <p className="text-sm mt-1 opacity-90">Update ratings based on performance and feedback</p>
+            </div>
+            
+            <div className="p-6">
+              <div className="space-y-3 max-h-96 overflow-y-auto">
+                {practitioners.filter(p => p.verified).map((practitioner) => (
+                  <div key={practitioner.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-800">{practitioner.name}</h3>
+                      <p className="text-sm text-gray-600">{practitioner.specialization}</p>
+                      <p className="text-xs text-gray-500 mt-1">{practitioner.bio}</p>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="text-center">
+                        <p className="text-sm text-gray-600">Current Rating</p>
+                        <p className="text-2xl font-bold text-yellow-600">
+                          ⭐ {practitioner.rating || 0}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => handleUpdateRating(practitioner.id, Math.max(0, (practitioner.rating || 0) - 0.5))}
+                          className="px-3 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition font-semibold text-sm"
+                          title="Decrease by 0.5"
+                        >
+                          -0.5
+                        </button>
+                        <input
+                          type="number"
+                          min="0"
+                          max="5"
+                          step="0.1"
+                          value={practitioner.rating || 0}
+                          onChange={(e) => {
+                            const val = parseFloat(e.target.value);
+                            if (val >= 0 && val <= 5) {
+                              handleUpdateRating(practitioner.id, val);
+                            }
+                          }}
+                          className="w-16 px-2 py-2 border-2 border-gray-300 rounded-lg text-center font-semibold focus:border-yellow-500 focus:outline-none"
+                        />
+                        <button
+                          onClick={() => handleUpdateRating(practitioner.id, Math.min(5, (practitioner.rating || 0) + 0.5))}
+                          className="px-3 py-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition font-semibold text-sm"
+                          title="Increase by 0.5"
+                        >
+                          +0.5
+                        </button>
+                        <button
+                          onClick={() => handleUpdateRating(practitioner.id, 5)}
+                          className="px-3 py-2 bg-yellow-100 text-yellow-700 rounded-lg hover:bg-yellow-200 transition font-semibold text-sm"
+                          title="Set to 5 stars"
+                        >
+                          ⭐ 5
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {practitioners.filter(p => p.verified).length === 0 && (
+                  <p className="text-center text-gray-500 py-8">No verified practitioners found</p>
+                )}
+              </div>
+              
+              <button
+                onClick={() => setShowManageRatings(false)}
+                className="w-full mt-6 px-6 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg font-semibold hover:shadow-lg transition"
               >
                 Close
               </button>

@@ -34,6 +34,7 @@ export const practitionerService = {
   create: (data) => api.post('/practitioners', data),
   verify: (id) => api.put(`/practitioners/${id}/verify`),
   adminVerify: (data) => api.post('/practitioners/admin/verify', data),
+  updateRating: (id, rating) => api.put(`/practitioners/${id}/rating?rating=${rating}`),
 };
 
 export const sessionService = {
