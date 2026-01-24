@@ -38,6 +38,7 @@ export const practitionerService = {
 
 export const sessionService = {
   book: (data) => api.post('/sessions', data),
+  getAll: () => api.get('/sessions'),
   getUserSessions: (userId) => api.get(`/sessions/user/${userId}`),
   getPractitionerSessions: (practitionerId) => api.get(`/sessions/practitioner/${practitionerId}`),
   updateStatus: (id, status) => api.put(`/sessions/${id}/status?status=${status}`),
@@ -49,10 +50,12 @@ export const productService = {
   getByCategory: (category) => api.get(`/products/category/${category}`),
   getAvailable: () => api.get('/products/available'),
   create: (data) => api.post('/products', data),
+  updateStock: (id, stock) => api.put(`/products/${id}/stock?stock=${stock}`),
 };
 
 export const orderService = {
   create: (data) => api.post('/orders', data),
+  getAll: () => api.get('/orders'),
   getUserOrders: (userId) => api.get(`/orders/user/${userId}`),
 };
 
@@ -80,4 +83,5 @@ export const notificationService = {
   markAsRead: (id) => api.put(`/notifications/${id}/read`),
 };
 
+export { api };
 export default api;

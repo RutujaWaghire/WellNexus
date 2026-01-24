@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../components/Toast';
+import { orderService, sessionService } from '../services/api';
+import UpiPayment from '../components/UpiPayment';
 import PaymentSuccess from '../components/PaymentSuccess';
 
 const Cart = () => {
@@ -10,8 +12,26 @@ const Cart = () => {
   const { addToast } = useToast();
   const [activeTab, setActiveTab] = useState('products');
   const [cart, setCart] = useState({ products: [], sessions: [] });
+  const [showUpiPayment, setShowUpiPayment] = useState(false);
   const [showPaymentSuccess, setShowPaymentSuccess] = useState(false);
-  const [paymentDetails, setPaymentDetails] = useState({ amount: 0, orderId: '' });
+  const [showAddressModal, setShowAddressModal] = useState(false);
+  const [deliveryAddress, setDeliveryAddress] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    address: '',
+    city: '',
+    state: '',
+    pincode: ''
+  });
+  const [paymentDetails, setPaymentDetails] = useState({ 
+    amount: 0, 
+    orderId: '', 
+    transactionId: '',
+    method: '',
+    upiId: '',
+    deliveryAddress: null
+  });
 
   useEffect(() => {
     loadCart();
@@ -70,22 +90,103 @@ const Cart = () => {
       return;
     }
 
+    // If there are products, show address modal first
+    if (cart.products.length > 0) {
+      setShowAddressModal(true);
+    } else {
+      // For sessions only, proceed directly to payment
+      proceedToPayment();
+    }
+  };
+
+  const handleAddressSubmit = () => {
+    if (!deliveryAddress.name || !deliveryAddress.phone || !deliveryAddress.email ||
+        !deliveryAddress.address || !deliveryAddress.city || !deliveryAddress.pincode) {
+      addToast('Please fill all address fields', 'warning');
+      return;
+    }
+    setShowAddressModal(false);
+    proceedToPayment();
+  };
+
+  const proceedToPayment = () => {
     const total = calculateTotal();
-    const orderId = `ORD${Date.now()}`;
+    setPaymentDetails({ 
+      amount: total, 
+      orderId: `ORD${Date.now()}`,
+      transactionId: '',
+      method: '',
+      upiId: '',
+      deliveryAddress: cart.products.length > 0 ? deliveryAddress : null
+    });
+    setShowUpiPayment(true);
+  };
+
+  const handlePaymentSuccess = async (details) => {
+    setPaymentDetails(prev => ({ ...prev, ...details }));
+    setShowUpiPayment(false);
     
-    addToast('Processing payment...', 'info');
+    // Save orders to database
+    let orderSaveError = false;
     
-    // Simulate payment processing
-    setTimeout(() => {
-      setPaymentDetails({ amount: total, orderId });
-      setShowPaymentSuccess(true);
-      updateCart({ products: [], sessions: [] });
-    }, 1500);
+    try {
+      // Create orders for each product
+      if (cart.products.length > 0) {
+        for (const item of cart.products) {
+          await orderService.create({
+            userId: user.userId,
+            productId: item.id,
+            quantity: item.quantity || 1,
+            totalAmount: item.price * (item.quantity || 1),
+            status: 'pending',
+            deliveryName: deliveryAddress?.name,
+            deliveryPhone: deliveryAddress?.phone,
+            deliveryEmail: deliveryAddress?.email,
+            deliveryAddress: deliveryAddress?.address,
+            deliveryCity: deliveryAddress?.city,
+            deliveryState: deliveryAddress?.state,
+            deliveryPincode: deliveryAddress?.pincode,
+            transactionId: details.transactionId,
+            paymentMethod: details.method
+          });
+        }
+        addToast('Orders saved successfully!', 'success');
+      }
+      
+      // Create session bookings
+      if (cart.sessions.length > 0) {
+        for (const session of cart.sessions) {
+          await sessionService.book({
+            practitionerId: session.practitionerId,
+            userId: user.userId,
+            date: new Date(`${session.date}T${session.time}`).toISOString(),
+            status: 'SCHEDULED',
+            notes: `Booked: ${session.specialization}`
+          });
+        }
+        addToast('Sessions booked successfully!', 'success');
+      }
+    } catch (error) {
+      console.error('Error saving orders:', error);
+      orderSaveError = true;
+      addToast('Payment successful but error saving order', 'warning');
+    }
+    
+    setShowPaymentSuccess(true);
+    updateCart({ products: [], sessions: [] });
+    
+    if (!orderSaveError) {
+      addToast('Payment successful!', 'success');
+    }
   };
 
   const handlePaymentClose = () => {
     setShowPaymentSuccess(false);
     navigate('/dashboard');
+  };
+
+  const handleUpiPaymentClose = () => {
+    setShowUpiPayment(false);
   };
 
   return (
@@ -259,12 +360,134 @@ const Cart = () => {
         </div>
       </div>
 
+      {/* Address Modal */}
+      {showAddressModal && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 fade-in">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-4 scale-in max-h-[90vh] overflow-y-auto">
+            <div className="bg-gradient-to-r from-green-600 to-teal-600 p-6 rounded-t-2xl text-white">
+              <h2 className="text-2xl font-bold">📍 Delivery Address</h2>
+              <p className="text-sm opacity-90 mt-1">Enter your delivery details</p>
+            </div>
+            
+            <div className="p-6 space-y-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name *</label>
+                  <input
+                    type="text"
+                    placeholder="John Doe"
+                    value={deliveryAddress.name}
+                    onChange={(e) => setDeliveryAddress({...deliveryAddress, name: e.target.value})}
+                    className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Phone Number *</label>
+                  <input
+                    type="tel"
+                    placeholder="+91 98765 43210"
+                    value={deliveryAddress.phone}
+                    onChange={(e) => setDeliveryAddress({...deliveryAddress, phone: e.target.value})}
+                    className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none"
+                  />
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address *</label>
+                <input
+                  type="email"
+                  placeholder="your.email@example.com"
+                  value={deliveryAddress.email}
+                  onChange={(e) => setDeliveryAddress({...deliveryAddress, email: e.target.value})}
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none"
+                />
+                <p className="text-xs text-gray-500 mt-1">📧 Order confirmation will be sent here</p>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Complete Address *</label>
+                <textarea
+                  placeholder="House/Flat No., Building, Street"
+                  value={deliveryAddress.address}
+                  onChange={(e) => setDeliveryAddress({...deliveryAddress, address: e.target.value})}
+                  rows="3"
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none"
+                ></textarea>
+              </div>
+              
+              <div className="grid md:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">City *</label>
+                  <input
+                    type="text"
+                    placeholder="Mumbai"
+                    value={deliveryAddress.city}
+                    onChange={(e) => setDeliveryAddress({...deliveryAddress, city: e.target.value})}
+                    className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">State</label>
+                  <input
+                    type="text"
+                    placeholder="Maharashtra"
+                    value={deliveryAddress.state}
+                    onChange={(e) => setDeliveryAddress({...deliveryAddress, state: e.target.value})}
+                    className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">PIN Code *</label>
+                  <input
+                    type="text"
+                    placeholder="400001"
+                    maxLength="6"
+                    value={deliveryAddress.pincode}
+                    onChange={(e) => setDeliveryAddress({...deliveryAddress, pincode: e.target.value.replace(/\D/g, '')})}
+                    className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none"
+                  />
+                </div>
+              </div>
+              
+              <div className="flex gap-3 mt-6">
+                <button
+                  onClick={() => setShowAddressModal(false)}
+                  className="flex-1 px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleAddressSubmit}
+                  className="flex-1 px-6 py-3 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-lg font-semibold hover:shadow-lg transition transform hover:scale-105"
+                >
+                  Continue to Payment →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* UPI Payment Modal */}
+      <UpiPayment
+        show={showUpiPayment}
+        onClose={handleUpiPaymentClose}
+        amount={paymentDetails.amount}
+        onPaymentSuccess={handlePaymentSuccess}
+        deliveryAddress={paymentDetails.deliveryAddress}
+      />
+
       {/* Payment Success Modal */}
       <PaymentSuccess
         show={showPaymentSuccess}
         onClose={handlePaymentClose}
         amount={paymentDetails.amount}
         orderId={paymentDetails.orderId}
+        transactionId={paymentDetails.transactionId}
+        method={paymentDetails.method}
+        upiId={paymentDetails.upiId}
+        deliveryAddress={paymentDetails.deliveryAddress}
       />
     </div>
   );

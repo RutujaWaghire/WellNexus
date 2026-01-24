@@ -33,4 +33,18 @@ public class Order {
     
     @Column(nullable = false)
     private String status;
+    
+    // Delivery Address fields
+    private String deliveryName;
+    private String deliveryPhone;
+    private String deliveryEmail;
+    @Column(columnDefinition = "TEXT")
+    private String deliveryAddress;
+    private String deliveryCity;
+    private String deliveryState;
+    private String deliveryPincode;
+    
+    // Payment tracking
+    private String transactionId;
+    private String paymentMethod;
 }

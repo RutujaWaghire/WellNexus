@@ -20,6 +20,11 @@ public class TherapySessionController {
         return ResponseEntity.ok(sessionService.bookSession(session));
     }
     
+    @GetMapping
+    public ResponseEntity<List<TherapySession>> getAllSessions() {
+        return ResponseEntity.ok(sessionService.getAllSessions());
+    }
+    
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<TherapySession>> getUserSessions(@PathVariable Long userId) {
         return ResponseEntity.ok(sessionService.getUserSessions(userId));

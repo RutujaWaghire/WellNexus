@@ -37,21 +37,21 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center p-6 rounded-lg shadow-lg hover:shadow-xl transition">
+            <Link to="/practitioners" className="text-center p-6 rounded-lg shadow-lg hover:shadow-xl transition hover:scale-105 cursor-pointer">
               <div className="text-4xl mb-4">🧘</div>
               <h3 className="text-xl font-bold mb-2">Book Therapy Sessions</h3>
               <p className="text-gray-600">Connect with verified practitioners in physiotherapy, acupuncture, Ayurveda, and more</p>
-            </div>
-            <div className="text-center p-6 rounded-lg shadow-lg hover:shadow-xl transition">
+            </Link>
+            <Link to="/products" className="text-center p-6 rounded-lg shadow-lg hover:shadow-xl transition hover:scale-105 cursor-pointer">
               <div className="text-4xl mb-4">🛒</div>
               <h3 className="text-xl font-bold mb-2">Wellness Products</h3>
               <p className="text-gray-600">Shop for wellness tools, supplements, and alternative therapy products</p>
-            </div>
-            <div className="text-center p-6 rounded-lg shadow-lg hover:shadow-xl transition">
+            </Link>
+            <Link to="/community" className="text-center p-6 rounded-lg shadow-lg hover:shadow-xl transition hover:scale-105 cursor-pointer">
               <div className="text-4xl mb-4">💬</div>
               <h3 className="text-xl font-bold mb-2">Community Forum</h3>
               <p className="text-gray-600">Ask questions and get expert advice from practitioners</p>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

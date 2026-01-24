@@ -26,9 +26,13 @@ const BookSession = () => {
       const found = response.data.find(p => p.id === parseInt(practitionerId));
       if (found) {
         setPractitioner(found);
+      } else {
+        addToast('Practitioner not found', 'error');
+        navigate('/practitioners');
       }
     } catch (error) {
       console.error('Error loading practitioner:', error);
+      addToast('Error loading practitioner details', 'error');
     }
   };
 
@@ -102,17 +106,24 @@ const BookSession = () => {
     }
 
     if (!selectedDate || !selectedSlot) {
-      addToast('Please select date and time', 'warning');
+      addToast('Please select both date and time slot', 'warning');
       return;
     }
 
     try {
       const dateTime = `${selectedDate}T${selectedSlot.time}:00`;
-      await sessionService.book({
+      const sessionData = {
         practitionerId: parseInt(practitionerId),
         userId: user.userId,
-        date: new Date(dateTime).toISOString()
-      });
+        date: new Date(dateTime).toISOString(),
+        status: 'SCHEDULED',
+        notes: `Booked therapy session with specialization: ${practitioner?.specialization || 'Alternative Therapy'}`
+      };
+      
+      console.log('Booking session with data:', sessionData);
+      
+      const response = await sessionService.book(sessionData);
+      console.log('Booking response:', response);
       
       setShowConfirmation(true);
       addToast('Session booked successfully! 🎉', 'success');
@@ -121,7 +132,9 @@ const BookSession = () => {
         navigate('/dashboard');
       }, 2000);
     } catch (error) {
-      addToast('Error booking session', 'error');
+      console.error('Booking error:', error);
+      const errorMessage = error.response?.data?.message || error.message || 'Error booking session';
+      addToast(errorMessage, 'error');
     }
   };
 

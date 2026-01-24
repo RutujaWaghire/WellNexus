@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
-import { practitionerService, sessionService, orderService } from '../services/api';
+import { practitionerService, sessionService, orderService, productService } from '../services/api';
+import { useToast } from '../components/Toast';
 
 /**
  * Enhanced Admin Dashboard
@@ -10,6 +11,7 @@ import { practitionerService, sessionService, orderService } from '../services/a
  */
 const AdminDashboard = () => {
   const { user } = useAuth();
+  const { addToast } = useToast();
   const [stats, setStats] = useState({
     totalUsers: 0,
     totalPractitioners: 0,
@@ -21,6 +23,16 @@ const AdminDashboard = () => {
     todaySessions: 0
   });
   const [recentSessions, setRecentSessions] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [showAddProduct, setShowAddProduct] = useState(false);
+  const [showManageStock, setShowManageStock] = useState(false);
+  const [newProduct, setNewProduct] = useState({
+    name: '',
+    description: '',
+    price: '',
+    category: '',
+    stock: ''
+  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -34,15 +46,17 @@ const AdminDashboard = () => {
       setLoading(true);
       
       // Fetch all data
-      const [practitionersRes, sessionsRes, ordersRes] = await Promise.all([
+      const [practitionersRes, sessionsRes, ordersRes, productsRes] = await Promise.all([
         practitionerService.getAll(),
         sessionService.getAll(),
-        orderService.getAll()
+        orderService.getAll(),
+        productService.getAll()
       ]);
 
       const practitioners = practitionersRes.data;
       const sessions = sessionsRes.data;
       const orders = ordersRes.data;
+      setProducts(productsRes.data);
 
       // Calculate stats
       const verified = practitioners.filter(p => p.verified).length;
@@ -73,6 +87,39 @@ const AdminDashboard = () => {
       console.error('Error loading dashboard data:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleAddProduct = async () => {
+    if (!newProduct.name || !newProduct.price || !newProduct.category || !newProduct.stock) {
+      addToast('Please fill all required fields', 'warning');
+      return;
+    }
+
+    try {
+      await productService.create({
+        ...newProduct,
+        price: parseFloat(newProduct.price),
+        stock: parseInt(newProduct.stock)
+      });
+      addToast('Product added successfully! ✅', 'success');
+      setShowAddProduct(false);
+      setNewProduct({ name: '', description: '', price: '', category: '', stock: '' });
+      loadDashboardData();
+    } catch (error) {
+      console.error('Error adding product:', error);
+      addToast('Error adding product', 'error');
+    }
+  };
+
+  const handleUpdateStock = async (productId, newStock) => {
+    try {
+      await productService.updateStock(productId, newStock);
+      addToast('Stock updated successfully! ✅', 'success');
+      loadDashboardData();
+    } catch (error) {
+      console.error('Error updating stock:', error);
+      addToast('Error updating stock', 'error');
     }
   };
 
@@ -200,13 +247,19 @@ const AdminDashboard = () => {
                 <span>✓</span>
                 <span>Verify Practitioners</span>
               </Link>
-              <button className="w-full p-3 bg-blue-50 hover:bg-blue-100 rounded-lg transition flex items-center gap-2 text-left">
-                <span>📊</span>
-                <span>View Reports</span>
+              <button 
+                onClick={() => setShowAddProduct(true)}
+                className="w-full p-3 bg-blue-50 hover:bg-blue-100 rounded-lg transition flex items-center gap-2 text-left"
+              >
+                <span>➕</span>
+                <span>Add New Product</span>
               </button>
-              <button className="w-full p-3 bg-purple-50 hover:bg-purple-100 rounded-lg transition flex items-center gap-2 text-left">
-                <span>⚙️</span>
-                <span>System Settings</span>
+              <button 
+                onClick={() => setShowManageStock(true)}
+                className="w-full p-3 bg-purple-50 hover:bg-purple-100 rounded-lg transition flex items-center gap-2 text-left"
+              >
+                <span>📦</span>
+                <span>Manage Stock</span>
               </button>
             </div>
           </div>
@@ -273,6 +326,157 @@ const AdminDashboard = () => {
           )}
         </div>
       </div>
+
+      {/* Add Product Modal */}
+      {showAddProduct && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 fade-in">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-4 scale-in max-h-[90vh] overflow-y-auto">
+            <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-6 rounded-t-2xl text-white">
+              <h2 className="text-2xl font-bold">➕ Add New Product</h2>
+            </div>
+            
+            <div className="p-6 space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Product Name *</label>
+                <input
+                  type="text"
+                  placeholder="Organic Green Tea"
+                  value={newProduct.name}
+                  onChange={(e) => setNewProduct({...newProduct, name: e.target.value})}
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Description</label>
+                <textarea
+                  placeholder="Product description..."
+                  value={newProduct.description}
+                  onChange={(e) => setNewProduct({...newProduct, description: e.target.value})}
+                  rows="3"
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none"
+                ></textarea>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Price (₹) *</label>
+                  <input
+                    type="number"
+                    placeholder="299"
+                    value={newProduct.price}
+                    onChange={(e) => setNewProduct({...newProduct, price: e.target.value})}
+                    className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Stock *</label>
+                  <input
+                    type="number"
+                    placeholder="100"
+                    value={newProduct.stock}
+                    onChange={(e) => setNewProduct({...newProduct, stock: e.target.value})}
+                    className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none"
+                  />
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Category *</label>
+                <select
+                  value={newProduct.category}
+                  onChange={(e) => setNewProduct({...newProduct, category: e.target.value})}
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none"
+                >
+                  <option value="">Select Category</option>
+                  <option value="Herbal Supplements">Herbal Supplements</option>
+                  <option value="Organic Foods">Organic Foods</option>
+                  <option value="Essential Oils">Essential Oils</option>
+                  <option value="Wellness Products">Wellness Products</option>
+                  <option value="Meditation Tools">Meditation Tools</option>
+                </select>
+              </div>
+              
+              <div className="flex gap-3 mt-6">
+                <button
+                  onClick={() => {
+                    setShowAddProduct(false);
+                    setNewProduct({ name: '', description: '', price: '', category: '', stock: '' });
+                  }}
+                  className="flex-1 px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleAddProduct}
+                  className="flex-1 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:shadow-lg transition transform hover:scale-105"
+                >
+                  Add Product
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Manage Stock Modal */}
+      {showManageStock && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 fade-in">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 scale-in max-h-[90vh] overflow-y-auto">
+            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-6 rounded-t-2xl text-white">
+              <h2 className="text-2xl font-bold">📦 Manage Product Stock</h2>
+            </div>
+            
+            <div className="p-6">
+              <div className="space-y-3 max-h-96 overflow-y-auto">
+                {products.map((product) => (
+                  <div key={product.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-800">{product.name}</h3>
+                      <p className="text-sm text-gray-600">{product.category}</p>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="text-center">
+                        <p className="text-sm text-gray-600">Current Stock</p>
+                        <p className={`text-2xl font-bold ${product.stock < 10 ? 'text-red-600' : 'text-green-600'}`}>
+                          {product.stock}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => handleUpdateStock(product.id, Math.max(0, product.stock - 10))}
+                          className="px-3 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition font-semibold"
+                        >
+                          -10
+                        </button>
+                        <button
+                          onClick={() => handleUpdateStock(product.id, product.stock + 10)}
+                          className="px-3 py-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition font-semibold"
+                        >
+                          +10
+                        </button>
+                        <button
+                          onClick={() => handleUpdateStock(product.id, product.stock + 50)}
+                          className="px-3 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition font-semibold"
+                        >
+                          +50
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              <button
+                onClick={() => setShowManageStock(false)}
+                className="w-full mt-6 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg transition"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

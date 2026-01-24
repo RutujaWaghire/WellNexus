@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../components/Toast';
+import { sessionService } from '../services/api';
 
 /**
  * Practitioner Dashboard Component
@@ -9,6 +10,9 @@ import { useToast } from '../components/Toast';
 const PractitionerDashboard = () => {
   const { user } = useAuth();
   const { addToast } = useToast();
+  
+  const [sessions, setSessions] = useState([]);
+  const [loading, setLoading] = useState(true);
   
   const [availability, setAvailability] = useState({
     monday: { enabled: true, start: '09:00', end: '18:00' },
@@ -26,19 +30,75 @@ const PractitionerDashboard = () => {
   ]);
 
   const [earnings, setEarnings] = useState({
-    today: 1500,
-    thisWeek: 8500,
-    thisMonth: 28000,
-    total: 125000,
-    sessionsCompleted: 56
+    today: 0,
+    thisWeek: 0,
+    thisMonth: 0,
+    total: 0,
+    sessionsCompleted: 0
   });
 
-  const [todaySessions, setTodaySessions] = useState([
-    { id: 1, patient: 'Patient #123', time: '10:00 AM', status: 'completed' },
-    { id: 2, patient: 'Patient #456', time: '11:30 AM', status: 'completed' },
-    { id: 3, patient: 'Patient #789', time: '02:00 PM', status: 'upcoming' },
-    { id: 4, patient: 'Patient #234', time: '03:30 PM', status: 'upcoming' }
-  ]);
+  const [todaySessions, setTodaySessions] = useState([]);
+
+  useEffect(() => {
+    loadDashboardData();
+  }, [user]);
+
+  const loadDashboardData = async () => {
+    try {
+      setLoading(true);
+      const response = await sessionService.getPractitionerSessions(user.userId);
+      const allSessions = response.data;
+      setSessions(allSessions);
+
+      // Calculate earnings
+      const sessionFee = 500; // Default fee
+      const completedSessions = allSessions.filter(s => s.status === 'completed');
+      const today = new Date().toDateString();
+      const todayStart = new Date();
+      todayStart.setHours(0, 0, 0, 0);
+      const weekStart = new Date();
+      weekStart.setDate(weekStart.getDate() - 7);
+      const monthStart = new Date();
+      monthStart.setDate(1);
+
+      const todayEarnings = completedSessions.filter(s => 
+        new Date(s.date).toDateString() === today
+      ).length * sessionFee;
+
+      const weekEarnings = completedSessions.filter(s => 
+        new Date(s.date) >= weekStart
+      ).length * sessionFee;
+
+      const monthEarnings = completedSessions.filter(s => 
+        new Date(s.date) >= monthStart
+      ).length * sessionFee;
+
+      setEarnings({
+        today: todayEarnings,
+        thisWeek: weekEarnings,
+        thisMonth: monthEarnings,
+        total: completedSessions.length * sessionFee,
+        sessionsCompleted: completedSessions.length
+      });
+
+      // Today's sessions
+      const todaySessionsList = allSessions
+        .filter(s => new Date(s.date).toDateString() === today)
+        .map(s => ({
+          id: s.id,
+          patient: `Patient #${s.userId}`,
+          time: new Date(s.date).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+          status: s.status
+        }));
+      setTodaySessions(todaySessionsList);
+
+    } catch (error) {
+      console.error('Error loading dashboard data:', error);
+      addToast('Error loading dashboard data', 'error');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleAvailabilityToggle = (day) => {
     setAvailability(prev => ({
@@ -71,6 +131,17 @@ const PractitionerDashboard = () => {
   };
 
   const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading dashboard...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 py-12 fade-in">

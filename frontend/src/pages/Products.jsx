@@ -1,17 +1,33 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { productService, orderService } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../components/Toast';
 import SkeletonLoader from '../components/SkeletonLoader';
 import SearchFilter from '../components/SearchFilter';
+import UpiPayment from '../components/UpiPayment';
+import PaymentSuccess from '../components/PaymentSuccess';
 
 const Products = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
   const { user } = useAuth();
   const { addToast } = useToast();
+  
+  // Payment states
+  const [showUpiPayment, setShowUpiPayment] = useState(false);
+  const [showPaymentSuccess, setShowPaymentSuccess] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [paymentDetails, setPaymentDetails] = useState({ 
+    amount: 0, 
+    orderId: '', 
+    transactionId: '',
+    method: '',
+    upiId: '' 
+  });
 
   useEffect(() => {
     loadProducts();
@@ -108,23 +124,61 @@ const Products = () => {
     window.dispatchEvent(new Event('cartUpdate'));
   };
 
-  const placeOrder = async (product) => {
+  const buyNow = (product) => {
     if (!user) {
-      addToast('Please login to place an order', 'warning');
+      addToast('Please login to buy products', 'warning');
+      navigate('/login');
       return;
     }
     
+    if (product.stock === 0) {
+      addToast('Product out of stock', 'error');
+      return;
+    }
+    
+    // Set selected product and payment details
+    setSelectedProduct(product);
+    setPaymentDetails({ 
+      amount: product.price, 
+      orderId: `ORD${Date.now()}`,
+      transactionId: '',
+      method: '',
+      upiId: '' 
+    });
+    setShowUpiPayment(true);
+  };
+
+  const handlePaymentSuccess = async (details) => {
     try {
+      // Create order after successful payment
       await orderService.create({
         userId: user.userId,
-        productId: product.id,
-        quantity: 1
+        productId: selectedProduct.id,
+        quantity: 1,
+        totalAmount: selectedProduct.price,
+        status: 'CONFIRMED'
       });
+      
+      setPaymentDetails(prev => ({ ...prev, ...details }));
+      setShowUpiPayment(false);
+      setShowPaymentSuccess(true);
       addToast('Order placed successfully! 🎉', 'success');
       loadProducts();
     } catch (error) {
-      addToast('Error placing order', 'error');
+      console.error('Error creating order:', error);
+      addToast('Payment successful but error saving order', 'warning');
+      setShowUpiPayment(false);
     }
+  };
+
+  const handlePaymentClose = () => {
+    setShowPaymentSuccess(false);
+    setSelectedProduct(null);
+  };
+
+  const handleUpiPaymentClose = () => {
+    setShowUpiPayment(false);
+    setSelectedProduct(null);
   };
 
   const categories = ['all', ...new Set(products.map(p => p.category))];
@@ -247,11 +301,11 @@ const Products = () => {
                       🛒 Add to Cart
                     </button>
                     <button
-                      onClick={() => placeOrder(product)}
+                      onClick={() => buyNow(product)}
                       disabled={product.stock === 0}
                       className="flex-1 btn-primary btn-animated disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Buy Now
+                      💳 Buy Now
                     </button>
                   </div>
                 </div>
@@ -273,6 +327,25 @@ const Products = () => {
           </div>
         )}
       </div>
+
+      {/* UPI Payment Modal */}
+      <UpiPayment
+        show={showUpiPayment}
+        onClose={handleUpiPaymentClose}
+        amount={paymentDetails.amount}
+        onPaymentSuccess={handlePaymentSuccess}
+      />
+
+      {/* Payment Success Modal */}
+      <PaymentSuccess
+        show={showPaymentSuccess}
+        onClose={handlePaymentClose}
+        amount={paymentDetails.amount}
+        orderId={paymentDetails.orderId}
+        transactionId={paymentDetails.transactionId}
+        method={paymentDetails.method}
+        upiId={paymentDetails.upiId}
+      />
     </div>
   );
 };

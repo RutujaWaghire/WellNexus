@@ -17,6 +17,10 @@ public class TherapySessionService {
         return sessionRepository.save(session);
     }
     
+    public List<TherapySession> getAllSessions() {
+        return sessionRepository.findAll();
+    }
+    
     public List<TherapySession> getUserSessions(Long userId) {
         return sessionRepository.findByUserId(userId);
     }

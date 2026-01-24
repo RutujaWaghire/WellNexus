@@ -30,10 +30,15 @@ public class OrderService {
         order.setStatus("pending");
         order.setTotalAmount(product.getPrice() * order.getQuantity());
         
+        // Reduce stock immediately on order creation
         product.setStock(product.getStock() - order.getQuantity());
         productRepository.save(product);
         
         return orderRepository.save(order);
+    }
+    
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
     }
     
     public List<Order> getUserOrders(Long userId) {
